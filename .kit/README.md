@@ -42,6 +42,7 @@
 │       ├── claude-code-starter-todo-add/SKILL.md       # workspace/todo/TODO.md にタスク追加
 │       ├── claude-code-starter-todo-close/SKILL.md     # workspace/todo/TODO-closed.md へ移動 (Closed/Obsoleted)
 │       ├── claude-code-starter-skill-add/SKILL.md      # 利用者カスタムスキルを新規作成（gitignored）
+│       ├── claude-code-starter-session-export/SKILL.md # セッション .jsonl を workspace/sessions/ に書き出し（報告用）
 │       └── claude-code-starter-update-docs/SKILL.md    # ドキュメント更新（admin_mode=true 専用）
 ├── workspace/                  # gitignored。利用者の自由作業場所
 └── .kit/                       # ボイラープレート本体（利用者は触らない）

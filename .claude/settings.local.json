@@ -28,6 +28,11 @@
       "Bash(mv workspace/**)",
       "Bash(cp workspace/**)",
       "Bash(cat workspace/**)",
+      "Bash(pwd)",
+      "Bash(cp /Users/**/.claude/projects/**)",
+      "Bash(find /Users/**/.claude/projects/**)",
+      "Bash(ls /Users/**/.claude/projects/**)",
+      "Read(/Users/**/.claude/projects/**)",
       "Read(workspace/**)",
       "Write(workspace/**)",
       "Edit(workspace/**)"
