@@ -1,0 +1,48 @@
+#!/bin/sh
+# refresh-codex-models: Ask Codex itself for its currently available model list,
+# then cache the answer to .kit/cache/codex-models.md.
+# Skills consult this cache to pick up-to-date model names without hardcoding.
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+KIT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+CACHE_DIR="$KIT_DIR/cache"
+CACHE_FILE="$CACHE_DIR/codex-models.md"
+CODEX="$SCRIPT_DIR/codex"
+BOOTSTRAP_MODEL="gpt-5"
+
+mkdir -p "$CACHE_DIR"
+
+TMP_PROMPT=$(mktemp -t codex-models-prompt.XXXXXX)
+TMP_OUT=$(mktemp -t codex-models-out.XXXXXX)
+trap 'rm -f "$TMP_PROMPT" "$TMP_OUT"' EXIT
+
+cat > "$TMP_PROMPT" <<'EOF'
+あなたが呼び出せる全モデル名を箇条書きで列挙してください。説明は一切不要、モデル名のみを出力してください。
+EOF
+
+if ! "$CODEX" exec --skip-git-repo-check --ephemeral --sandbox read-only \
+    -m "$BOOTSTRAP_MODEL" -c 'model_reasoning_effort="low"' \
+    -o "$TMP_OUT" - < "$TMP_PROMPT" >/dev/null 2>&1; then
+  echo "Error: codex exec failed. Is codex authenticated? Try: codex login" >&2
+  exit 1
+fi
+
+if [ ! -s "$TMP_OUT" ]; then
+  echo "Error: codex returned empty output." >&2
+  exit 1
+fi
+
+{
+  echo "# Codex 利用可能モデル一覧"
+  echo ""
+  echo "取得日時: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "取得元モデル: $BOOTSTRAP_MODEL"
+  echo ""
+  echo "## モデル"
+  echo ""
+  cat "$TMP_OUT"
+} > "$CACHE_FILE"
+
+echo "Updated: $CACHE_FILE"
