@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uname:*)",
+      "Bash(echo:*)",
+      "Bash(command -v:*)",
+      "Bash(mise:*)",
+      "Bash(brew --version:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(test:*)",
+      "Bash(stat:*)",
+      "Bash(python3 -m json.tool:*)",
+      "Bash(python3 -c:*)",
+      "Bash(.kit/scripts/claude plugin:*)",
+      "Bash(.kit/scripts/codex --version)",
+      "Bash(.kit/scripts/codex exec:*)",
+      "Bash(date:*)",
+      "Bash(tee:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(wc:*)",
+      "Bash(cut:*)",
+      "Bash(mkdir -p workspace/**)",
+      "Bash(rm workspace/**)",
+      "Bash(mv workspace/**)",
+      "Bash(cp workspace/**)",
+      "Bash(cat workspace/**)",
+      "Read(workspace/**)",
+      "Write(workspace/**)",
+      "Edit(workspace/**)"
+    ]
+  }
+}

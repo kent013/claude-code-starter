@@ -35,7 +35,6 @@
 │       ├── claude-code-starter-doctor/SKILL.md        # 環境診断（読み取り専用、不足を一覧化）
 │       ├── claude-code-starter-codex-vscode/SKILL.md  # Codex 呼び出し共通規約
 │       ├── claude-code-starter-codex-review/SKILL.md  # Codex レビュー・合議規約
-│       ├── claude-code-starter-office/SKILL.md        # Office (.pptx/.xlsx/.docx) 操作（uv + Python）
 │       ├── claude-code-starter-todo-add/SKILL.md      # workspace/todo/TODO.md にタスク追加
 │       ├── claude-code-starter-todo-close/SKILL.md    # workspace/todo/TODO-closed.md へ移動 (Closed/Obsoleted)
 │       ├── claude-code-starter-skill-add/SKILL.md     # 利用者カスタムスキルを新規作成（gitignored）
@@ -55,6 +54,8 @@
     └── scripts/
         ├── codex                      # Mac/Linux: VSCode 拡張の codex バイナリ起動
         ├── codex.cmd                  # Windows 版
+        ├── claude                     # Mac/Linux: VSCode 拡張の claude バイナリ起動（plugin 操作等で使用）
+        ├── claude.cmd                 # Windows 版
         ├── refresh-codex-models       # Codex にモデル一覧を問い合わせて cache/ に保存
         └── refresh-codex-models.cmd   # Windows 版
 ```
