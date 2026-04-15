@@ -20,7 +20,9 @@
 
 ```
 ./
+├── README.md                   # 利用者・作者共通の入口（セットアップ概要、スキル一覧）
 ├── AGENTS.md                   # 利用者モード本文 + .kit/.env を見て分岐する指示
+├── AGENTS-INSTALL.md           # AI アシスタント向けセットアップ案内ガイド
 ├── CLAUDE.md                   # スタブ（AGENTS.md 嫁）
 ├── .gitignore                  # workspace/ と OS 隠しファイルを除外
 ├── mise.toml                   # Node / Python / uv のバージョン宣言（mise が読む）
@@ -29,16 +31,18 @@
 │   ├── extensions.json         # 推奨拡張: anthropic.claude-code, openai.chatgpt
 │   └── settings.json           # claudeCode.respectGitIgnore: false
 ├── .claude/
+│   ├── settings.local.json                             # gitignored ではないが各自環境向け：Bash 許可パターンなど
 │   └── skills/
-│       ├── .gitignore                                 # claude-code-starter-* のみ committed、利用者作成スキルは ignore
-│       ├── claude-code-starter-setup/SKILL.md         # 初回環境構築（mise + Node 20 / Python / uv + Codex認証 + MCP案内）
-│       ├── claude-code-starter-doctor/SKILL.md        # 環境診断（読み取り専用、不足を一覧化）
-│       ├── claude-code-starter-codex-vscode/SKILL.md  # Codex 呼び出し共通規約
-│       ├── claude-code-starter-codex-review/SKILL.md  # Codex レビュー・合議規約
-│       ├── claude-code-starter-todo-add/SKILL.md      # workspace/todo/TODO.md にタスク追加
-│       ├── claude-code-starter-todo-close/SKILL.md    # workspace/todo/TODO-closed.md へ移動 (Closed/Obsoleted)
-│       ├── claude-code-starter-skill-add/SKILL.md     # 利用者カスタムスキルを新規作成（gitignored）
-│       └── claude-code-starter-update-docs/SKILL.md   # ドキュメント更新（admin_mode=true 専用）
+│       ├── .gitignore                                  # claude-code-starter-* のみ committed、利用者作成スキルは ignore
+│       ├── claude-code-starter-setup/SKILL.md          # 初回環境構築（mise + Node 20 / Python / uv + Codex認証 + MCP案内）
+│       ├── claude-code-starter-doctor/SKILL.md         # 環境診断（読み取り専用、不足を一覧化）
+│       ├── claude-code-starter-codex-vscode/SKILL.md   # Codex 呼び出し共通規約
+│       ├── claude-code-starter-codex-review/SKILL.md   # Codex レビュー・合議規約
+│       ├── claude-code-starter-mcp-setup/SKILL.md      # MCP（GitHub / Backlog / GDrive / DocBase / Context7）対話セットアップ
+│       ├── claude-code-starter-todo-add/SKILL.md       # workspace/todo/TODO.md にタスク追加
+│       ├── claude-code-starter-todo-close/SKILL.md     # workspace/todo/TODO-closed.md へ移動 (Closed/Obsoleted)
+│       ├── claude-code-starter-skill-add/SKILL.md      # 利用者カスタムスキルを新規作成（gitignored）
+│       └── claude-code-starter-update-docs/SKILL.md    # ドキュメント更新（admin_mode=true 専用）
 ├── workspace/                  # gitignored。利用者の自由作業場所
 └── .kit/                       # ボイラープレート本体（利用者は触らない）
     ├── README.md               # 本ファイル
@@ -86,6 +90,10 @@ cp .kit/.env.example .kit/.env
 ### `scripts/codex` / `scripts/codex.cmd`
 
 VSCode拡張 `openai.chatgpt` に同梱されている codex バイナリを動的検出して起動。別途インストール不要で、拡張のアップデートに自動追従する。
+
+### `scripts/claude` / `scripts/claude.cmd`
+
+VSCode拡張 `anthropic.claude-code` に同梱されている claude バイナリを動的検出して起動。`.claude/skills/` 内スクリプトから `plugin list` / `plugin marketplace add` 等の Claude Code CLI 機能を呼び出すのに使う。拡張のアップデートに自動追従する。
 
 ### `scripts/refresh-codex-models` / `.cmd`
 
