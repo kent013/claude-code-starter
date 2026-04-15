@@ -188,10 +188,12 @@ cp <source .jsonl> workspace/sessions/<YYYYMMDD-HHMMSS>/
 
 ## 許可設定との対応
 
-このスキルで使う Bash コマンドは [.claude/settings.local.json](.claude/settings.local.json) で事前許可されている想定:
+`~/.claude/projects/**` への読取・コピーは **他プロジェクトのセッションにも触れられてしまう** ため、
+事前許可リストには含めていません（セキュリティ上の配慮）。
 
-- `pwd`, `ls`, `date`, `wc` — 一覧・メタ情報
-- `cp` — セッションファイルコピー（源が `~/.claude/projects/**`、先が `workspace/sessions/**`）
-- `mkdir -p workspace/**`, `Write(workspace/**)` — 保存先作成・サマリ生成
+初回実行時は Claude Code の承認ダイアログが出ます。利用者に以下を案内してください:
 
-許可が通らずダイアログが出た場合は、利用者に `.claude/settings.local.json` への追加を案内してください（該当パターンを 1 行追加するだけ）。
+- 「セッションを保存している場所（`~/.claude/projects/...`）を読み取ります。許可しますか？」
+- その場で許可する（1 回限り or このセッション中のみ）のが安全。**常に許可**は推奨しない
+
+許可されなかった場合は、利用者に「このスキルは使えない」と伝えて終了する。回避策として手動コピーは提案しない（複雑になるため）。
